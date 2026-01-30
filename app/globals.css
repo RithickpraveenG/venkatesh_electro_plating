@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
 :root {
+  /* Base Colors - Matching Business Card (White & Blue) */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1e3a8a;
+  /* Deep Blue Text */
+
+  /* Industrial Palette Adapted */
+  --color-steel-grey: #64748b;
+  /* Slate-500 */
+  --color-zinc-silver: #f1f5f9;
+  /* Slate-100 */
+  --color-deep-blue: #1e3a8a;
+  /* Primary Blue from card */
+  --color-company-red: #b91c1c;
+  /* Rust Red from Company Name */
+  --color-olive-green: #15803d;
+  /* Keeping distinct secondary color */
+
+  /* Accents */
+  --color-primary: var(--color-deep-blue);
+  --color-secondary: var(--color-company-red);
+  --color-accent: #2563eb;
+
+  /* Fonts */
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Roboto Slab', serif;
+  /* Adding serif for the company name */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-steel-grey: var(--color-steel-grey);
+  --color-zinc-silver: var(--color-zinc-silver);
+  --color-deep-blue: var(--color-deep-blue);
+  --color-company-red: var(--color-company-red);
+  --color-olive-green: var(--color-olive-green);
+
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+
+  --font-serif: var(--font-serif);
 }
 
 @media (prefers-color-scheme: dark) {
+
+  /* Enforcing Light Theme as requested for 'White and Blue' look */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #1e3a8a;
+    --color-zinc-silver: #f8fafc;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-zinc-silver);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-steel-grey);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-deep-blue);
 }
