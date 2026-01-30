@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Simplified Bolt Icon
 const SmallBolt = ({ color, angle, x = 0, y = 0, delay = 0 }: { color: string, angle: number, x?: number, y?: number, delay?: number }) => (
@@ -34,6 +34,48 @@ const GearShape = ({ className }: { className?: string }) => (
     </svg>
 );
 
+const Bubbles = () => {
+    const [bubbles, setBubbles] = useState<Array<{ x: number, duration: number, delay: number, left: number }>>([]);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        const newBubbles = [...Array(6)].map(() => ({
+            x: Math.random() * 40 - 20,
+            duration: 2 + Math.random(),
+            delay: Math.random() * 2,
+            left: 20 + Math.random() * 60
+        }));
+        setBubbles(newBubbles);
+    }, []);
+
+    if (!mounted) return null;
+
+    return (
+        <>
+            {bubbles.map((b, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute bottom-0 w-3 h-3 bg-blue-200/40 rounded-full border border-blue-300/20"
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{
+                        y: -150,
+                        x: b.x,
+                        opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                        duration: b.duration,
+                        repeat: Infinity,
+                        delay: b.delay,
+                        ease: "linear"
+                    }}
+                    style={{ left: `${b.left}%` }}
+                />
+            ))}
+        </>
+    );
+};
+
 export default function PlatingAnimation() {
     const colors = ["#FFD700", "#60A5FA", "#556B2F", "#1F2937"];
     const [colorIndex, setColorIndex] = useState(0);
@@ -54,25 +96,7 @@ export default function PlatingAnimation() {
                             className="absolute top-4 left-0 right-0 h-[150%] bg-blue-100/50"
                         />
                         {/* Bubbles */}
-                        {[...Array(6)].map((_, i) => (
-                            <motion.div
-                                key={i}
-                                className="absolute bottom-0 w-3 h-3 bg-blue-200/40 rounded-full border border-blue-300/20"
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{
-                                    y: -150,
-                                    x: Math.random() * 40 - 20,
-                                    opacity: [0, 1, 0]
-                                }}
-                                transition={{
-                                    duration: 2 + Math.random(),
-                                    repeat: Infinity,
-                                    delay: Math.random() * 2,
-                                    ease: "linear"
-                                }}
-                                style={{ left: `${20 + Math.random() * 60}%` }}
-                            />
-                        ))}
+                        <Bubbles />
                     </div>
                 </div>
                 {/* Steel Top Rim */}

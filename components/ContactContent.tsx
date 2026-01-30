@@ -51,13 +51,18 @@ export default function ContactContent() {
                 body: JSON.stringify(data),
             });
 
-            if (!response.ok) throw new Error('Failed to submit');
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.details || result.error || 'Failed to submit');
+            }
 
             setSubmitStatus('success');
             reset();
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
             setSubmitStatus('error');
+            alert(`Error: ${error.message}`); // Temporary alert to show the specific error
         } finally {
             setIsSubmitting(false);
         }
@@ -100,7 +105,7 @@ export default function ContactContent() {
                                         <MapPin className="h-6 w-6 text-[var(--color-olive-green)] shrink-0 mt-1" />
                                         <div>
                                             <h4 className="font-semibold text-white">Factory Address</h4>
-                                            <p>123 Industrial Estate, Sector 5,<br />Chennai, TN 600058, India</p>
+                                            <p>SF. NO 99/2A, SREE MARUTHI INDUSTRIAL ESTATE,<br />SCHOOL STREET, Chinnavedampatti,<br />Coimbatore, Tamil Nadu 641049</p>
                                         </div>
                                     </div>
 
@@ -108,7 +113,7 @@ export default function ContactContent() {
                                         <Phone className="h-6 w-6 text-[var(--color-olive-green)] shrink-0" />
                                         <div>
                                             <h4 className="font-semibold text-white">Phone</h4>
-                                            <p>+91 98765 43210</p>
+                                            <p>+91 98422 96662</p>
                                         </div>
                                     </div>
 
@@ -116,7 +121,7 @@ export default function ContactContent() {
                                         <Mail className="h-6 w-6 text-[var(--color-olive-green)] shrink-0" />
                                         <div>
                                             <h4 className="font-semibold text-white">Email</h4>
-                                            <p>info@industrialplating.com</p>
+                                            <p>venkateshelectroplating@gmail.com</p>
                                         </div>
                                     </div>
                                 </div>

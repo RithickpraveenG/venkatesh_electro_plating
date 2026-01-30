@@ -17,17 +17,25 @@ export async function POST(req: Request) {
         const body = await req.json();
         const validatedData = schema.parse(body);
 
-        // 1. Save to Database
-        const enquiry = await db.enquiry.create({
-            data: {
-                company: validatedData.company,
-                name: validatedData.name,
-                email: validatedData.email,
-                phone: validatedData.phone,
-                service: validatedData.service,
-                message: validatedData.message,
-            },
-        });
+
+        // 1. Save to Database (Optional: Don't fail the request if DB fails)
+        let enquiryId = null;
+        try {
+            const enquiry = await db.enquiry.create({
+                data: {
+                    company: validatedData.company,
+                    name: validatedData.name,
+                    email: validatedData.email,
+                    phone: validatedData.phone,
+                    service: validatedData.service,
+                    message: validatedData.message,
+                },
+            });
+            enquiryId = enquiry.id;
+        } catch (dbError) {
+            console.error("Database Error (Skipping save):", dbError);
+            // Proceed to send email even if DB fails
+        }
 
         // 2. Send Email Notification
         // Using Ethereal for dev environment as per plan
@@ -42,8 +50,8 @@ export async function POST(req: Request) {
 
         // Admin Notification
         await transporter.sendMail({
-            from: '"Industrial Plating Website" <no-reply@industrialplating.com>',
-            to: 'admin@industrialplating.com', // In real app, this would be env var
+            from: '"VENKATESH ELECTRO PLATING" <sendervenkateshelectroplating@gmail.com>',
+            to: 'venkateshelectroplating@gmail.com', // Updated by user request
             subject: `New Enquiry from ${validatedData.company}`,
             html: `
         <h2>New Service Enquiry</h2>
@@ -58,12 +66,13 @@ export async function POST(req: Request) {
       `,
         });
 
-        return NextResponse.json({ success: true, id: enquiry.id });
+        return NextResponse.json({ success: true, id: enquiryId });
     } catch (error) {
-        console.error('Enquiry API Error:', error);
+        console.error("API Error:", error); // Log error for debugging
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ error: 'Invalid data', details: (error as z.ZodError).errors }, { status: 400 });
+            return NextResponse.json({ error: 'Invalid data', details: error.issues }, { status: 400 });
         }
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        return NextResponse.json({ error: 'Internal Server Error', details: errorMessage }, { status: 500 });
     }
 }

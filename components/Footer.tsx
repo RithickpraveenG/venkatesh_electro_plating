@@ -10,7 +10,7 @@ export function Footer() {
 
                     {/* Brand from Card */}
                     <div className="space-y-4">
-                        <div className="flex flex-col items-start">
+                        <div className="flex flex-col items-center">
                             {/* Logo Image */}
                             <div className="relative w-56 h-20 mb-2">
                                 <Image
@@ -24,9 +24,9 @@ export function Footer() {
                                 ZINC PLATING
                             </p>
                         </div>
-                        <div className="pt-4 space-y-1">
+                        <div className="pt-4 space-y-1 flex flex-col items-center">
                             <p className="font-bold text-lg text-[var(--color-deep-blue)]">THIRUMURUGAN V.P.</p>
-                            <p className="font-bold text-xl flex items-center gap-2 text-[var(--color-deep-blue)]">
+                            <p className="font-bold text-xl flex items-center justify-center gap-2 text-[var(--color-deep-blue)]">
                                 <span className="text-sm font-normal">Cell :</span> 98422 96662
                             </p>
                         </div>
@@ -65,19 +65,26 @@ export function Footer() {
                                     <MapPin className="h-5 w-5 text-[var(--color-deep-blue)] shrink-0" />
                                 </div>
                                 <span className="text-sm leading-relaxed">
-                                    <strong>Flat.No. SF.No. 99/2A</strong>,<br />
-                                    Building: SREE MARUTHI INDUSTRIAL ESTATE,<br />
-                                    School Street, Chinnavedampatti,<br />
-                                    Coimbatore - 641 049,<br />
-                                    Tamilnadu.
+                                    <strong>SF. NO 99/2A</strong>,<br />
+                                    SREE MARUTHI INDUSTRIAL ESTATE,<br />
+                                    SCHOOL STREET, Chinnavedampatti,<br />
+                                    Coimbatore, Tamil Nadu 641049.
+                                </span>
+                            </li>
+                            <li className="flex items-center gap-3 group">
+                                <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
+                                    <Phone className="h-5 w-5 text-[var(--color-deep-blue)] shrink-0" />
+                                </div>
+                                <span className="text-sm font-bold text-[var(--color-deep-blue)]">
+                                    +91 98422 96662
                                 </span>
                             </li>
                             <li className="flex items-center gap-3 group">
                                 <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
                                     <Mail className="h-5 w-5 text-[var(--color-deep-blue)] shrink-0" />
                                 </div>
-                                <a href="mailto:venkateshplating@yahoo.com" className="text-sm font-bold text-[var(--color-deep-blue)] hover:text-[var(--color-company-red)] transition-colors">
-                                    venkateshplating@yahoo.com
+                                <a href="mailto:venkateshelectroplating@gmail.com" className="text-sm font-bold text-[var(--color-deep-blue)] hover:text-[var(--color-company-red)] transition-colors">
+                                    venkateshelectroplating@gmail.com
                                 </a>
                             </li>
                         </ul>

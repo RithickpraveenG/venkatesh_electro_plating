@@ -22,11 +22,11 @@ export function Navbar() {
 
     return (
         <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 text-[var(--color-deep-blue)] shadow-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-10xl mx-6 px-0 sm:px-6 lg:px-6">
                 <div className="flex items-center justify-between h-20">
-                    <div className="flex-shrink-0 flex items-center gap-2">
-                        <Link href="/" className="flex items-center gap-3">
-                            <div className="relative w-48 h-16">
+                    <div className="flex-shrink-0 flex items-center gap-1">
+                        <Link href="/" className="flex items-center gap-1">
+                            <div className="relative w-48 h-16 -ml-4">
                                 <Image
                                     src="/logo.png"
                                     alt="Venkatesh Electro Plating"
@@ -35,11 +35,14 @@ export function Navbar() {
                                     priority
                                 />
                             </div>
+                            <span className="text-xl font-bold text-[var(--color-deep-blue)] tracking-wide hidden lg:block">
+                                VENKATESH ELECTRO PLATING
+                            </span>
                         </Link>
                     </div>
 
-                    <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-8">
+                    <div className="hidden md:flex items-center gap-8">
+                        <div className="flex items-baseline space-x-6">
                             {links.map((link) => (
                                 <Link
                                     key={link.href}
@@ -55,9 +58,6 @@ export function Navbar() {
                                 </Link>
                             ))}
                         </div>
-                    </div>
-
-                    <div className="hidden md:block">
                         <Link href="/contact">
                             <Button className="bg-[var(--color-company-red)] hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md shadow-md hover:shadow-lg transition-all">
                                 Get Quotation
