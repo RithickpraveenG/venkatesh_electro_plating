@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './ui/Button';
 import { cn } from './ui/Button';
 
@@ -76,32 +77,40 @@ export function Navbar() {
                 </div>
             </div>
 
-            {isOpen && (
-                <div className="md:hidden bg-white border-t border-gray-100">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        {links.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                onClick={() => setIsOpen(false)}
-                                className={cn(
-                                    'block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wide',
-                                    pathname === link.href
-                                        ? 'text-[var(--color-company-red)] bg-red-50'
-                                        : 'text-[var(--color-deep-blue)] hover:text-[var(--color-company-red)] hover:bg-gray-50'
-                                )}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        <div className="mt-4 px-3">
-                            <Link href="/contact" onClick={() => setIsOpen(false)}>
-                                <Button className="w-full bg-[var(--color-company-red)] hover:bg-red-700 text-white font-bold">Get Quotation</Button>
-                            </Link>
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="md:hidden bg-white border-t border-gray-100 overflow-hidden"
+                    >
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            {links.map((link) => (
+                                <Link
+                                    key={link.href}
+                                    href={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className={cn(
+                                        'block px-3 py-2 rounded-md text-base font-bold uppercase tracking-wide',
+                                        pathname === link.href
+                                            ? 'text-[var(--color-company-red)] bg-red-50'
+                                            : 'text-[var(--color-deep-blue)] hover:text-[var(--color-company-red)] hover:bg-gray-50'
+                                    )}
+                                >
+                                    {link.label}
+                                </Link>
+                            ))}
+                            <div className="mt-4 px-3">
+                                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                    <Button className="w-full bg-[var(--color-company-red)] hover:bg-red-700 text-white font-bold">Get Quotation</Button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </nav>
     );
 }

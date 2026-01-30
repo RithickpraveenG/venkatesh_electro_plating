@@ -81,7 +81,7 @@ export default function PlatingAnimation() {
     const [colorIndex, setColorIndex] = useState(0);
 
     return (
-        <div className="relative w-[340px] h-[400px] mx-auto scale-90 md:scale-100 font-sans">
+        <div className="relative w-full max-w-[340px] h-[400px] mx-auto scale-[0.85] sm:scale-90 md:scale-100 font-sans">
 
             {/* The Tank - White Polypropylene with Steel Frame */}
             <div className="absolute bottom-0 left-0 right-0 h-44 z-30">

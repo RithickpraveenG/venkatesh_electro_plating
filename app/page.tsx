@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-[var(--color-deep-blue)] text-white">
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[var(--color-deep-blue)] text-white py-20 md:py-0">
         {/* Background Gradients */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-[var(--color-deep-blue)]/95 to-[var(--color-deep-blue)] z-0" />
 
@@ -36,32 +36,32 @@ export default function Home() {
         <div className="relative z-10 container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
 
           {/* Hero Content */}
-          <div className="text-left">
+          <div className="text-left order-1 md:order-1">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
                 PRECISION <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-olive-green)] to-yellow-400">
                   SURFACE FINISHING
                 </span>
               </h1>
 
-              <p className="text-xl text-gray-300 mb-8 max-w-lg leading-relaxed border-l-4 border-[var(--color-olive-green)] pl-6">
+              <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-lg leading-relaxed border-l-4 border-[var(--color-olive-green)] pl-6">
                 Advanced electroplating solutions for automotive and industrial sectors.
                 Delivering superior corrosion resistance and aesthetic excellence.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button size="lg" className="w-full sm:w-auto shadow-[0_0_20px_rgba(163,180,11,0.3)]">
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full shadow-[0_0_20px_rgba(163,180,11,0.3)]">
                     Request Quotation
                   </Button>
                 </Link>
-                <Link href="/services">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto border-gray-500 text-gray-300 hover:text-white hover:border-white">
+                <Link href="/services" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full border-gray-500 text-gray-300 hover:text-white hover:border-white">
                     Explore Services
                   </Button>
                 </Link>
@@ -74,7 +74,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="hidden md:flex justify-center items-center relative"
+            className="flex justify-center items-center relative order-2 md:order-2 scale-90 md:scale-100"
           >
             {/* Glow Effect behind animation */}
             <div className="absolute inset-0 bg-[var(--color-olive-green)] blur-[100px] opacity-20 rounded-full" />
