@@ -75,7 +75,7 @@ export default function ContactContent() {
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-4xl font-bold text-[var(--color-deep-blue)] mb-6 uppercase tracking-wider"
+                        className="text-3xl md:text-4xl font-bold text-[var(--color-deep-blue)] mb-6 uppercase tracking-wider"
                     >
                         Get a <span className="text-[var(--color-olive-green)]">Quotation</span>
                     </motion.h1>
