@@ -54,7 +54,8 @@ export default function ContactContent() {
             const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(result.details || result.error || 'Failed to submit');
+                const debugInfo = result.debug ? `\n(Sent as: ${result.debug.user})` : '';
+                throw new Error((result.details || result.error || 'Failed to submit') + debugInfo);
             }
 
             setSubmitStatus('success');
