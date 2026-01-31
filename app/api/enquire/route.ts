@@ -38,20 +38,26 @@ export async function POST(req: Request) {
         }
 
         // 2. Send Email Notification
-        // Using Ethereal for dev environment as per plan
+        // 2. Send Email Notification
+        const smtpHost = process.env.SMTP_HOST || 'smtp.ethereal.email';
+        const smtpPort = Number(process.env.SMTP_PORT) || 587;
+        const smtpUser = process.env.SMTP_USER || 'ethereal_user';
+        const smtpPass = process.env.SMTP_PASS || 'ethereal_pass';
+
         const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.ethereal.email',
-            port: Number(process.env.SMTP_PORT) || 587,
+            host: smtpHost,
+            port: smtpPort,
+            secure: smtpPort === 465, // true for 465, false for other ports
             auth: {
-                user: process.env.SMTP_USER || 'ethereal_user',
-                pass: process.env.SMTP_PASS || 'ethereal_pass',
+                user: smtpUser,
+                pass: smtpPass,
             },
         });
 
         // Admin Notification
         await transporter.sendMail({
-            from: '"VENKATESH ELECTRO PLATING" <sendervenkateshelectroplating@gmail.com>',
-            to: 'venkateshelectroplating@gmail.com', // Updated by user request
+            from: `"VENKATESH ELECTRO PLATING" <${smtpUser}>`, // Sender address must match authenticated user
+            to: process.env.SMTP_USER || 'venkateshelectroplating@gmail.com', // Send to self/admin
             subject: `New Enquiry from ${validatedData.company}`,
             html: `
         <h2>New Service Enquiry</h2>
