@@ -13,6 +13,13 @@ const schema = z.object({
 });
 
 export async function POST(req: Request) {
+    // 2. Send Email Notification
+    // Define config vars outside try block for error logging availability
+    const smtpHost = process.env.SMTP_HOST || 'smtp.ethereal.email';
+    const smtpPort = Number(process.env.SMTP_PORT) || 587;
+    const smtpUser = process.env.SMTP_USER || 'ethereal_user';
+    const smtpPass = process.env.SMTP_PASS || 'ethereal_pass';
+
     try {
         const body = await req.json();
         const validatedData = schema.parse(body);
@@ -39,10 +46,6 @@ export async function POST(req: Request) {
 
         // 2. Send Email Notification
         // 2. Send Email Notification
-        const smtpHost = process.env.SMTP_HOST || 'smtp.ethereal.email';
-        const smtpPort = Number(process.env.SMTP_PORT) || 587;
-        const smtpUser = process.env.SMTP_USER || 'ethereal_user';
-        const smtpPass = process.env.SMTP_PASS || 'ethereal_pass';
 
         const transporter = nodemailer.createTransport({
             host: smtpHost,
@@ -78,7 +81,6 @@ export async function POST(req: Request) {
         if (error instanceof z.ZodError) {
             return NextResponse.json({ error: 'Invalid data', details: error.issues }, { status: 400 });
         }
-        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         console.error("SMTP Config Check:", {
             host: smtpHost,
