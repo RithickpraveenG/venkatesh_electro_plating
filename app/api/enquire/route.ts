@@ -79,6 +79,22 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Invalid data', details: error.issues }, { status: 400 });
         }
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-        return NextResponse.json({ error: 'Internal Server Error', details: errorMessage }, { status: 500 });
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+        console.error("SMTP Config Check:", {
+            host: smtpHost,
+            port: smtpPort,
+            user: smtpUser, // Log usage (server logs only)
+            passLength: smtpPass ? smtpPass.length : 0
+        });
+
+        return NextResponse.json({
+            error: 'Email Send Failed',
+            details: errorMessage,
+            debug: {
+                user: smtpUser, // Return user to frontend to verify env var is loaded
+                host: smtpHost,
+                status: 'AUTH_FAILED_OR_CONNECT_ERROR'
+            }
+        }, { status: 500 });
     }
 }
