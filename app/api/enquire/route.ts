@@ -60,7 +60,7 @@ export async function POST(req: Request) {
         // Admin Notification
         await transporter.sendMail({
             from: `"VENKATESH ELECTRO PLATING" <'sendervenkateshelectroplating@gmail.com'>`, // Sender address must match authenticated user
-            to: process.env.SMTP_USER || 'venkateshelectroplating@gmail.com', // Send to self/admin
+            to: '<venkateshelectroplating@gmail.com>', // Send to self/admin
             subject: `New Enquiry from ${validatedData.company}`,
             html: `
         <h2>New Service Enquiry</h2>

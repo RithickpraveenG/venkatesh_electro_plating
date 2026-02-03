@@ -26,8 +26,8 @@ export function Navbar() {
             <div className="max-w-10xl mx-6 px-0 sm:px-6 lg:px-6">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex-shrink-0 flex items-center gap-1">
-                        <Link href="/" className="flex items-center gap-1">
-                            <div className="relative w-48 h-16 -ml-4">
+                        <Link href="/" className="flex items-center gap-2">
+                            <div className="relative w-24 h-10 md:w-48 md:h-16 -ml-2 md:-ml-4">
                                 <Image
                                     src="/logo.png"
                                     alt="Venkatesh Electro Plating"
@@ -36,7 +36,7 @@ export function Navbar() {
                                     priority
                                 />
                             </div>
-                            <span className="text-xl font-bold text-[var(--color-deep-blue)] tracking-wide hidden lg:block">
+                            <span className="text-[10px] sm:text-xs md:text-xl font-bold text-[var(--color-deep-blue)] tracking-wide whitespace-nowrap block">
                                 VENKATESH ELECTRO PLATING
                             </span>
                         </Link>

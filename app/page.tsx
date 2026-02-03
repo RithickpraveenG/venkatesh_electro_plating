@@ -100,19 +100,7 @@ export default function Home() {
               We utilize state-of-the-art automated lines to ensure uniform thickness, superior adhesion,
               and consistent salt spray endurance.
             </p>
-            <ul className="space-y-4">
-              {[
-                "Automated Rack & Barrel Plating",
-                "ISO 9001:2015 Compliant Processes",
-                "X-Ray Fluorescence Thickness Testing",
-                "24/7 Production Capability"
-              ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-[var(--color-deep-blue)] font-medium">
-                  <CheckCircle className="h-5 w-5 text-[var(--color-olive-green)]" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+
           </motion.div>
           <div className="relative h-[400px] rounded-lg overflow-hidden shadow-2xl group">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-110" />

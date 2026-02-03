@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Simplified Bolt Icon
 const SmallBolt = ({ color, angle, x = 0, y = 0, delay = 0 }: { color: string, angle: number, x?: number, y?: number, delay?: number }) => (
@@ -76,15 +77,50 @@ const Bubbles = () => {
     );
 };
 
+const PASSIVATIONS = [
+    { name: "Trivalent Yellow Passivation", color: "#E2D1F0" }, // Silvery Violet
+    { name: "Hexavalent Yellow Passivation", color: "#EAB308" }, // Bright Yellow
+    { name: "Hexavalent Blue Passivation", color: "#A4C8E1" }, // Silverish Blue
+    { name: "Zinc Black Passivation", color: "#1F2937" }, // Deep Black
+    { name: "Olive Green Passivation", color: "#8F9E82" }, // Silverish Green
+    { name: "Trivalent Blue Passivation", color: "#A5BFE1" }, // Silver/Blue
+];
+
 export default function PlatingAnimation() {
-    const colors = ["#FFD700", "#60A5FA", "#556B2F", "#1F2937"];
-    const [colorIndex, setColorIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isSubmerged, setIsSubmerged] = useState(false);
+    const [isAutoCycling, setIsAutoCycling] = useState(true);
+
+    // Animation Duration Configuration
+    const CYCLE_DURATION = 6000; // 6 seconds total per color
+    const DIP_TIME = 0.2; // 20% time to go down
+    const STAY_TIME = 0.5; // 50% time staying down
+    // Up time is remaining 30%
+
+    useEffect(() => {
+        if (!isAutoCycling) return; // Stop auto-cycling if manual mode is active
+
+        // Initial delay to sync with the first dip
+        const initialDelay = setTimeout(() => {
+            // Start the cycle loop
+            const timer = setInterval(() => {
+                // Change color locally but visual update synchronized
+                setCurrentIndex((prev) => (prev + 1) % PASSIVATIONS.length);
+            }, CYCLE_DURATION);
+
+            return () => clearInterval(timer);
+        }, CYCLE_DURATION * (DIP_TIME + (STAY_TIME / 2))); // Trigger first change mid-submersion
+
+        return () => clearTimeout(initialDelay);
+    }, [isAutoCycling]);
+
+    const currentPassivation = PASSIVATIONS[currentIndex];
 
     return (
-        <div className="relative w-full max-w-[340px] h-[400px] mx-auto scale-[0.85] sm:scale-90 md:scale-100 font-sans">
+        <div className="relative w-full max-w-[400px] h-[500px] mx-auto scale-[0.85] sm:scale-90 md:scale-100 font-sans flex flex-col items-center">
 
             {/* The Tank - White Polypropylene with Steel Frame */}
-            <div className="absolute bottom-0 left-0 right-0 h-44 z-30">
+            <div className="absolute bottom-24 left-0 right-0 h-44 z-30">
                 {/* Steel Frame Structure */}
                 <div className="absolute inset-0 border-x-8 border-b-8 border-gray-600 rounded-b-lg shadow-2xl bg-gray-300">
                     {/* Tank Body (White PP) */}
@@ -107,13 +143,16 @@ export default function PlatingAnimation() {
             <motion.div
                 className="absolute top-0 left-0 right-0 z-20 flex justify-center"
                 animate={{
-                    y: ["0%", "58%", "58%", "0%"]
+                    y: ["0%", "50%", "50%", "0%"]
                 }}
                 transition={{
-                    duration: 9,
+                    duration: CYCLE_DURATION / 1000, // Convert to seconds
                     repeat: Infinity,
                     ease: "easeInOut",
-                    times: [0, 0.2, 0.7, 1]
+                    times: [0, DIP_TIME, DIP_TIME + STAY_TIME, 1]
+                }}
+                onUpdate={(latest) => {
+                    // Ideally we track state here if needed, but CSS animation is driving visual
                 }}
             >
                 <div className="relative w-[240px] h-[200px] flex justify-center">
@@ -192,15 +231,30 @@ export default function PlatingAnimation() {
                                     ))}
 
                                     {/* Bolts Tumbling Inside (Between Ribs) */}
-                                    {/* Randomized positions relative to the moving strip */}
-                                    <div className="absolute top-[45px] left-10"><SmallBolt color="#9CA3AF" angle={45} x={0} y={0} /></div>
-                                    <div className="absolute top-[50px] left-28"><SmallBolt color={colors[colorIndex]} angle={120} x={0} y={0} /></div>
+                                    {/* Use currentPassivation.color for dynamic updates */}
+                                    <div className="absolute top-[20px] left-80"><SmallBolt color={currentPassivation.color} angle={240} x={0} y={0} /></div>
+                                    <div className="absolute top-[35px] right-60"><SmallBolt color={currentPassivation.color} angle={110} x={0} y={0} /></div>
+                                    <div className="absolute top-[45px] left-10"><SmallBolt color={currentPassivation.color} angle={45} x={0} y={0} /></div>
+                                    <div className="absolute top-[50px] left-28"><SmallBolt color={currentPassivation.color} angle={120} x={0} y={0} /></div>
+                                    <div className="absolute top-[60px] right-20"><SmallBolt color={currentPassivation.color} angle={15} x={0} y={0} /></div>
+                                    <div className="absolute top-[65px] left-120"><SmallBolt color={currentPassivation.color} angle={320} x={0} y={0} /></div>
+                                    <div className="absolute top-[75px] left-48"><SmallBolt color={currentPassivation.color} angle={280} x={0} y={0} /></div>
+                                    <div className="absolute top-[85px] right-80"><SmallBolt color={currentPassivation.color} angle={170} x={0} y={0} /></div>
 
-                                    <div className="absolute top-[135px] left-16"><SmallBolt color="#9CA3AF" angle={200} x={0} y={0} /></div>
-                                    <div className="absolute top-[140px] right-12"><SmallBolt color={colors[colorIndex]} angle={10} x={0} y={0} /></div>
+                                    <div className="absolute top-[100px] left-90"><SmallBolt color={currentPassivation.color} angle={60} x={0} y={0} /></div>
+                                    <div className="absolute top-[120px] left-36"><SmallBolt color={currentPassivation.color} angle={160} x={0} y={0} /></div>
+                                    <div className="absolute top-[135px] left-16"><SmallBolt color={currentPassivation.color} angle={200} x={0} y={0} /></div>
+                                    <div className="absolute top-[140px] right-12"><SmallBolt color={currentPassivation.color} angle={10} x={0} y={0} /></div>
+                                    <div className="absolute top-[150px] right-50"><SmallBolt color={currentPassivation.color} angle={250} x={0} y={0} /></div>
+                                    <div className="absolute top-[155px] left-60"><SmallBolt color={currentPassivation.color} angle={330} x={0} y={0} /></div>
 
-                                    <div className="absolute top-[225px] left-8"><SmallBolt color="#9CA3AF" angle={90} x={0} y={0} /></div>
-                                    <div className="absolute top-[230px] left-32"><SmallBolt color={colors[colorIndex]} angle={300} x={0} y={0} /></div>
+                                    <div className="absolute top-[180px] left-100"><SmallBolt color={currentPassivation.color} angle={90} x={0} y={0} /></div>
+                                    <div className="absolute top-[205px] right-24"><SmallBolt color={currentPassivation.color} angle={75} x={0} y={0} /></div>
+                                    <div className="absolute top-[215px] left-20"><SmallBolt color={currentPassivation.color} angle={140} x={0} y={0} /></div>
+                                    <div className="absolute top-[225px] left-8"><SmallBolt color={currentPassivation.color} angle={90} x={0} y={0} /></div>
+                                    <div className="absolute top-[230px] left-32"><SmallBolt color={currentPassivation.color} angle={300} x={0} y={0} /></div>
+                                    <div className="absolute top-[245px] right-40"><SmallBolt color={currentPassivation.color} angle={190} x={0} y={0} /></div>
+                                    <div className="absolute top-[255px] left-70"><SmallBolt color={currentPassivation.color} angle={220} x={0} y={0} /></div>
                                 </motion.div>
                             </div>
 
@@ -211,7 +265,53 @@ export default function PlatingAnimation() {
             </motion.div>
 
             {/* Front Tank Glass Overlay */}
-            <div className="absolute bottom-0 left-0 right-0 h-44 z-40 bg-gradient-to-t from-white/10 to-transparent pointer-events-none rounded-b-lg border-b-8 border-transparent" />
+            <div className="absolute bottom-24 left-0 right-0 h-44 z-40 bg-gradient-to-t from-white/10 to-transparent pointer-events-none rounded-b-lg border-b-8 border-transparent" />
+
+            {/* --- BOTTOM CONTROLS & TEXT --- */}
+            <div className="absolute bottom-0 left-0 right-0 z-50 flex justify-center items-center pb-4 gap-4">
+
+                {/* Previous Button */}
+                <button
+                    onClick={() => {
+                        setIsAutoCycling(false);
+                        setCurrentIndex((prev) => (prev - 1 + PASSIVATIONS.length) % PASSIVATIONS.length);
+                    }}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                    aria-label="Previous Color"
+                >
+                    <ChevronLeft size={24} />
+                </button>
+
+                <div className="min-w-[340px] md:min-w-[380px] text-center">
+                    <span className="text-sm md:text-base font-bold text-white uppercase tracking-[0.2em] block h-12 overflow-hidden relative drop-shadow-md">
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            exit={{ y: -20, opacity: 0 }}
+                            className="absolute inset-0 flex items-center justify-center leading-tight"
+                        >
+                            {currentPassivation.name}
+                        </motion.div>
+                    </span>
+                    {!isAutoCycling && (
+                        <p className="text-[10px] text-gray-400 uppercase tracking-widest mt-1">Manual Mode</p>
+                    )}
+                </div>
+
+                {/* Next Button */}
+                <button
+                    onClick={() => {
+                        setIsAutoCycling(false);
+                        setCurrentIndex((prev) => (prev + 1) % PASSIVATIONS.length);
+                    }}
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                    aria-label="Next Color"
+                >
+                    <ChevronRight size={24} />
+                </button>
+
+            </div>
 
         </div>
     );

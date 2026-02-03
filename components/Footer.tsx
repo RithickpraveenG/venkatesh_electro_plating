@@ -33,9 +33,9 @@ export function Footer() {
                     </div>
 
                     {/* Quick Links */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start">
                         <h3 className="text-lg font-bold mb-4 text-[var(--color-deep-blue)] uppercase border-b-2 border-gray-100 pb-2 inline-block">Quick Links</h3>
-                        <ul className="space-y-2 font-medium">
+                        <ul className="space-y-2 font-medium text-center md:text-left">
                             <li><Link href="/services" className="text-gray-600 hover:text-[var(--color-company-red)] transition-colors hover:translate-x-1 duration-200 inline-block">Services</Link></li>
                             <li><Link href="/process" className="text-gray-600 hover:text-[var(--color-company-red)] transition-colors hover:translate-x-1 duration-200 inline-block">Process</Link></li>
                             <li><Link href="/industries" className="text-gray-600 hover:text-[var(--color-company-red)] transition-colors hover:translate-x-1 duration-200 inline-block">Industries</Link></li>
@@ -44,34 +44,34 @@ export function Footer() {
                     </div>
 
                     {/* Services */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start">
                         <h3 className="text-lg font-bold mb-4 text-[var(--color-deep-blue)] uppercase border-b-2 border-gray-100 pb-2 inline-block">Our Expertise</h3>
-                        <ul className="space-y-2 text-sm text-gray-600 font-medium">
-                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Hexavalent Zinc Yellow</li>
-                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Hexavalent Zinc Blue</li>
-                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Trivalent Zinc Yellow</li>
-                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Trivalent Zinc Blue</li>
-                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Olive Green Passivation</li>
-                            <li className="flex items-center gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Zinc Black Passivation</li>
+                        <ul className="space-y-2 text-sm text-gray-600 font-medium w-full">
+                            <li className="flex items-center justify-center md:justify-start gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Hexavalent Zinc Yellow</li>
+                            <li className="flex items-center justify-center md:justify-start gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Hexavalent Zinc Blue</li>
+                            <li className="flex items-center justify-center md:justify-start gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Trivalent Zinc Yellow</li>
+                            <li className="flex items-center justify-center md:justify-start gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Trivalent Zinc Blue</li>
+                            <li className="flex items-center justify-center md:justify-start gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Olive Green Passivation</li>
+                            <li className="flex items-center justify-center md:justify-start gap-2"><span className="w-1 h-1 bg-[var(--color-company-red)] rounded-full"></span>Zinc Black Passivation</li>
                         </ul>
                     </div>
 
                     {/* Contact - Official Address */}
-                    <div>
+                    <div className="flex flex-col items-center md:items-start">
                         <h3 className="text-lg font-bold mb-4 text-[var(--color-deep-blue)] uppercase border-b-2 border-gray-100 pb-2 inline-block">Address</h3>
-                        <ul className="space-y-4 text-gray-700 font-medium">
-                            <li className="flex items-start gap-3 group">
-                                <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
+                        <ul className="space-y-4 text-gray-700 font-medium w-full">
+                            <li className="flex items-start gap-3 group justify-center md:justify-start text-center md:text-left">
+                                <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors mt-1">
                                     <MapPin className="h-5 w-5 text-[var(--color-deep-blue)] shrink-0" />
                                 </div>
-                                <span className="text-sm leading-relaxed">
+                                <span className="text-sm leading-relaxed max-w-[250px] md:max-w-none">
                                     <strong>SF. NO 99/2A</strong>,<br />
                                     SREE MARUTHI INDUSTRIAL ESTATE,<br />
                                     SCHOOL STREET, Chinnavedampatti,<br />
                                     Coimbatore, Tamil Nadu 641049.
                                 </span>
                             </li>
-                            <li className="flex items-center gap-3 group">
+                            <li className="flex items-center gap-3 group justify-center md:justify-start">
                                 <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
                                     <Phone className="h-5 w-5 text-[var(--color-deep-blue)] shrink-0" />
                                 </div>
@@ -79,11 +79,11 @@ export function Footer() {
                                     +91 98422 96662
                                 </span>
                             </li>
-                            <li className="flex items-center gap-3 group">
+                            <li className="flex items-center gap-3 group justify-center md:justify-start">
                                 <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 transition-colors">
                                     <Mail className="h-5 w-5 text-[var(--color-deep-blue)] shrink-0" />
                                 </div>
-                                <a href="mailto:venkateshelectroplating@gmail.com" className="text-sm font-bold text-[var(--color-deep-blue)] hover:text-[var(--color-company-red)] transition-colors">
+                                <a href="mailto:venkateshelectroplating@gmail.com" className="text-sm font-bold text-[var(--color-deep-blue)] hover:text-[var(--color-company-red)] transition-colors break-all">
                                     venkateshelectroplating@gmail.com
                                 </a>
                             </li>

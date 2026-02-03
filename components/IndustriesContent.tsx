@@ -35,56 +35,63 @@ const industries = [
 export default function IndustriesContent() {
     return (
         <>
-            <Section className="bg-[var(--color-background)]">
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.h1
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="text-4xl font-bold text-[var(--color-deep-blue)] mb-6 uppercase tracking-wider"
-                    >
-                        Industries <span className="text-[var(--color-olive-green)]">Served</span>
-                    </motion.h1>
-                    <p className="text-xl text-gray-600">
-                        Expert solutions tailored for the specific demands of diverse industrial sectors.
-                    </p>
-                </div>
+            <Section className="bg-[var(--color-deep-blue)] relative min-h-screen">
+                {/* Background Gradients */}
+                <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-[var(--color-deep-blue)]/95 to-[var(--color-deep-blue)] z-0" />
+                {/* Background Pattern */}
+                <div className="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]" />
 
-                <div className="grid md:grid-cols-2 gap-8">
-                    {industries.map((industry, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
+                <div className="relative z-10">
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <motion.h1
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="text-4xl font-bold text-white mb-6 uppercase tracking-wider"
                         >
-                            <Card className="h-full hover:border-[var(--color-olive-green)] transition-all duration-300">
-                                <CardContent className="p-8 flex flex-col md:flex-row gap-6">
-                                    <div className="shrink-0">
-                                        <div className="w-16 h-16 rounded-full bg-[var(--color-zinc-silver)]/50 flex items-center justify-center">
-                                            <industry.icon className="h-8 w-8 text-[var(--color-deep-blue)]" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold text-[var(--color-deep-blue)] mb-3">{industry.name}</h3>
-                                        <p className="text-[var(--color-steel-grey)] mb-6 leading-relaxed">
-                                            {industry.description}
-                                        </p>
-                                        <div>
-                                            <h4 className="font-semibold text-sm text-[var(--color-olive-green)] uppercase tracking-wide mb-2">Key Applications</h4>
-                                            <div className="flex flex-wrap gap-2">
-                                                {industry.applications.map((app, i) => (
-                                                    <span key={i} className="px-3 py-1 bg-white border border-gray-200 text-gray-600 text-sm rounded-md shadow-sm">
-                                                        {app}
-                                                    </span>
-                                                ))}
+                            Industries <span className="text-[var(--color-olive-green)]">Served</span>
+                        </motion.h1>
+                        <p className="text-xl text-gray-300">
+                            Expert solutions tailored for the specific demands of diverse industrial sectors.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {industries.map((industry, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <Card className="h-full bg-white hover:shadow-[0_0_30px_rgba(163,180,11,0.2)] transition-all duration-300 border-t-4 border-transparent hover:border-[var(--color-olive-green)]">
+                                    <CardContent className="p-8 flex flex-col md:flex-row gap-6">
+                                        <div className="shrink-0">
+                                            <div className="w-16 h-16 rounded-full bg-[var(--color-deep-blue)]/5 flex items-center justify-center">
+                                                <industry.icon className="h-8 w-8 text-[var(--color-deep-blue)]" />
                                             </div>
                                         </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </motion.div>
-                    ))}
+                                        <div>
+                                            <h3 className="text-2xl font-bold text-[var(--color-deep-blue)] mb-3">{industry.name}</h3>
+                                            <p className="text-gray-600 mb-6 leading-relaxed">
+                                                {industry.description}
+                                            </p>
+                                            <div>
+                                                <h4 className="font-semibold text-sm text-[var(--color-olive-green)] uppercase tracking-wide mb-2">Key Applications</h4>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {industry.applications.map((app, i) => (
+                                                        <span key={i} className="px-3 py-1 bg-gray-50 border border-gray-100 text-gray-600 text-sm rounded-md shadow-sm">
+                                                            {app}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </Section>
         </>
