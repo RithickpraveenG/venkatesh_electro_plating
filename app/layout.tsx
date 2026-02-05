@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { cn } from "@/components/ui/Button";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-roboto" });
@@ -11,6 +12,9 @@ const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"], varia
 export const metadata: Metadata = {
   title: "Venkatesh Electro Plating | Premium Surface Finishing",
   description: "Specialized in Hexavalent & Trivalent Zinc Passivation, Olive Green, and Black Passivation services.",
+  icons: {
+    icon: "/company.ico",
+  },
 };
 
 export default function RootLayout({
